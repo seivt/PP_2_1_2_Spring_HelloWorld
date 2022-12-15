@@ -6,7 +6,17 @@ public class App {
         ApplicationContext applicationContext =
                 new AnnotationConfigApplicationContext(AppConfig.class);
         HelloWorld bean =
-                (HelloWorld) applicationContext.getBean("helloworld");
+                applicationContext.getBean("helloWorld", HelloWorld.class);
         System.out.println(bean.getMessage());
+
+        HelloWorld bean2 =
+                applicationContext.getBean("helloWorld", HelloWorld.class);
+        System.out.println("Бины bean и bean2 указывают на один и тот же объект?\n Ответ:" +
+                (bean == bean2));
+
+        Cat cat = applicationContext.getBean("cat", Cat.class);
+        Cat cat2 = applicationContext.getBean("cat", Cat.class);
+        System.out.println("Бины cat и cat2 указывают на один и тот же объект?\n Ответ:" +
+                (cat == cat2));
     }
 }
